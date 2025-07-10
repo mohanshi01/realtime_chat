@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+asyncpg
+redis>=4.2.0
+psycopg2-binary
+pytest
+httpx
+websockets
