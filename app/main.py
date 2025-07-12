@@ -6,9 +6,9 @@ from app.database import engine
 app = FastAPI()
 chat = ChatManager()
 
-@app.on_event("startup")
+@app.on_event("startup")        #runs when app starts
 def startup():
-    Base.metadata.create_all(bind=engine)
+    Base.metadata.create_all(bind=engine)   #creates messages table
 
 @app.websocket("/ws/{room}")
 async def chat_ws(websocket: WebSocket, room: str):
