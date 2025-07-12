@@ -5,7 +5,7 @@ from sqlalchemy.exc import OperationalError
 
 DATABASE_URL = "postgresql://postgres:postgres@db:5432/chatdb"
 
-# Retry loop: wait for DB to be ready
+#retry loop: to wait 10 times for db to be ready
 for _ in range(10):
     try:
         engine = create_engine(DATABASE_URL)
