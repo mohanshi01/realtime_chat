@@ -8,10 +8,10 @@ class ChatManager:
         self.redis = RedisPubSub()  #to use Redis pub/sub for broadcasting
 
     async def connect(self, websocket, room):
-        await websocket.accept()
+        await websocket.accept()        #accepts ws connection and adds user to room
         self.connections.setdefault(room, []).append(websocket)
         await self.redis.subscribe(room, lambda msg: self.broadcast(room, msg))
-
+        
     async def handle_message(self, room, message):
         await self.redis.publish(room, message) #publishes msg on redis so all receivers can recieve it
         db = SessionLocal()
