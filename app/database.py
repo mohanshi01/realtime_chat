@@ -18,4 +18,4 @@ for _ in range(10):
 else:
     raise Exception("Could not connect to the database.")
 
-SessionLocal = sessionmaker(bind=engine)
+SessionLocal = sessionmaker(bind=engine)    #creates a session factory for database access
