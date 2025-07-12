@@ -9,12 +9,12 @@ class RedisPubSub:
         await self.redis.publish(room, message)
 
     async def subscribe(self, room: str, callback):
-        pubsub = self.redis.pubsub()
-        await pubsub.subscribe(room)
+        pubsub = self.redis.pubsub()    #creates a pubsub listener which lets user listen to published msgs in redis channels(chat rooms)
+        await pubsub.subscribe(room)  #not this coz it raises a runtimewarning if no callback(a func to be called back if something happens or this is completed) is supplied.
 
-        async def reader():
+        async def reader():             #listens to new messages on pubsub connection
             async for msg in pubsub.listen():
                 if msg["type"] == "message":
-                    await callback(msg["data"])
+                    await callback(msg["data"])    #calls that dummy callback
 
-        asyncio.create_task(reader())
+        asyncio.create_task(reader())   #starts reader func in background(asynchronously)
